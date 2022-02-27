@@ -2,7 +2,7 @@
     > File   : main.c
     > Author : Yuntong
     > Mail   : 171840067@smail.nju.edu.cn
-    > Date   : 2021/3/18
+    > Date   : 2021/8/20
 *******************************************************/
 
 // This program runs iteration method on linear system A * x = b;
@@ -158,7 +158,13 @@ int main(){
 		    Jacobi(matrix, diag, b, x, EPSILON, size, MAXIT, &num_iter);
 		    end = clock();
 
-		}else {
+		} else if (method == 6) {
+			//Gauss-Seidel method
+		    start = clock();
+		    GS(matrix, diag, b, x, EPSILON, size, MAXIT, &num_iter);
+		    end = clock();
+
+		} else {
 			printf("Undefined iteration method!\n");
 			return -1;
 		}
@@ -239,34 +245,41 @@ int main(){
     char *method_s = NULL, *precond_s = NULL;
     // double time = (double)(end - start) / CLOCKS_PER_SEC;
     time /= CLOCKS_PER_SEC;
-    double flops = mesh_size * num_iter / time;
+    // double flops = mesh_size * num_iter / time;
     printf("------------------------------------------------------\n");
 	printf("Mesh size :\t%d = %d * %d\n", mesh_size, size, size);
 	printf("------------------------------------------------------\n");
 	printf("Iteration method: ");
 	if (method == 1) {
 		method_s = "CG";
-		flops *= 19;
+		// flops *= 19;
 	} else if (method == 2) {
 		if (preconditioner == 1) {
 			precond_s = "Jacobi";
+		} else if (preconditioner == 2) {
+			precond_s = "GS";
 		} else if (preconditioner == 2) {
 			precond_s = "CG";
 		}
 		method_s = "CG";
 	} else if (method == 3) {
 		method_s = "BiCGSTAB";
-		flops *= 34;
+		// flops *= 34;
 	} else if (method == 4) {
 		if (preconditioner == 1) {
 			precond_s = "Jacobi";
 		} else if (preconditioner == 2) {
+			precond_s = "GS";
+		} else if (preconditioner == 3) {
 			precond_s = "CG";
 		}
 		method_s = "BiCGSTAB";
 	} else if (method == 5) {
 		method_s = "Jacobi";
-		flops *= 19;
+		// flops *= 19;
+	} else if (method == 6) {
+		method_s = "GS";
+		// flops *= 19;
 	}
 	if (precond_s) printf("%s_%s\t", precond_s, method_s);
 	else printf("%s\t", method_s);

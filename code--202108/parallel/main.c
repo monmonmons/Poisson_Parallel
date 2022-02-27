@@ -2,7 +2,7 @@
     > File   : main.c
     > Author : Yuntong
     > Mail   : 171840067@smail.nju.edu.cn
-    > Date   : 2021/3/30 
+    > Date   : 2021/8/25 
 *******************************************************/
 
 // This program runs iteration method parallelly on linear system A * x = b;
@@ -265,6 +265,8 @@ int main(int argc, char *argv[]) {
 			if (preconditioner == 1) {
 				precond_s = "Jacobi";
 			} else if (preconditioner == 2) {
+				precond_s = "GS";
+			} else if (preconditioner == 3) {
 				precond_s = "CG";
 			}
 			method_s = "CG";
@@ -274,6 +276,8 @@ int main(int argc, char *argv[]) {
 			if (preconditioner == 1) {
 				precond_s = "Jacobi";
 			} else if (preconditioner == 2) {
+				precond_s = "GS";
+			} else if (preconditioner == 3) {
 				precond_s = "CG";
 			}
 			method_s = "BiCGSTAB";

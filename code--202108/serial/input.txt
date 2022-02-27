@@ -1,0 +1,32 @@
+max_iter = 2000
+tol  = 1e-8
+
+tau0 = 0
+
+a1  = 1
+a2  = 0
+boundary_condition = 1
+
+nx  = 20
+method 			  = 2
+preconditioner    = 2
+precondition_iter = 10
+
+
+// 0. epsilon
+// 1. tau
+// 2. boundary_condition, a1, a2 : 1 -- Dirichlet (u = g); 
+								   2 -- Neumann; 
+								   3 -- Mixed (a1 * u + a2 * du/dn = g)
+// 3. nx (= ny)
+// 4. method : 1 -- CG; 
+			   2 -- PCG;  
+			   3 -- BICGSTAB; 
+			   4 -- P_BICGSTAB; 
+			   5 -- Jacobi;
+			   6 -- Guass-Seidel;
+// 5. preconditioner : 1 -- Jacobi; 
+					   2 -- G-S
+					   3 -- CG
+// 6. precondition iter
+
